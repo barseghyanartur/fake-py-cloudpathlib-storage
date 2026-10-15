@@ -24,7 +24,7 @@ are used for versioning (schema follows below):
 
 0.1.0
 -----
-unreleased
+2026-10-16
 
 - Initial beta release. Port of `fake-py-pathy-storage`_ 0.1.7 to
   `cloudpathlib`_ 0.26.
