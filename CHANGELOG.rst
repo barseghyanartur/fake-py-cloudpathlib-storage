@@ -22,6 +22,13 @@ are used for versioning (schema follows below):
   0.3.4 to 0.4).
 - All backwards incompatible changes are mentioned in this document.
 
+0.1.1
+-----
+unreleased
+
+- ``relpath()`` now returns POSIX-style paths on every OS. Previously,
+  ``LocalFileSystemStorage`` returned backslash-separated paths on Windows.
+
 0.1.0
 -----
 2026-10-16

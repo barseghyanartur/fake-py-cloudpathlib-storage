@@ -180,9 +180,9 @@ class CloudStorage(BaseStorage):
         return self._get_file(filename).exists()
 
     def relpath(self: "CloudStorage", filename: FileType) -> str:
-        """Return relative path."""
+        """Return relative path (POSIX-style, on every OS)."""
         file = self._get_file(filename)
-        return str(file.relative_to(self.bucket / self.root_path))
+        return file.relative_to(self.bucket / self.root_path).as_posix()
 
     def abspath(self: "CloudStorage", filename: FileType) -> str:
         """Return absolute path (URI)."""
