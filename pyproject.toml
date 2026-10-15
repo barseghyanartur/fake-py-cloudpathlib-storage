@@ -1,0 +1,270 @@
+[project]
+name = "fake-py-cloudpathlib-storage"
+description = "cloudpathlib storage for fake.py"
+readme = "README.rst"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "fake.py>=0.13.2",
+    "cloudpathlib>=0.26.0,<0.27.0",
+]
+authors = [
+    {name = "Artur Barseghyan", email = "artur.barseghyan@gmail.com"},
+]
+maintainers = [
+    {name = "Artur Barseghyan", email = "artur.barseghyan@gmail.com"},
+]
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development",
+]
+keywords = ["fake data", "test data", "cloudpathlib", "s3", "gcs", "azure"]
+
+[project.urls]
+Homepage = "https://github.com/barseghyanartur/fake-py-cloudpathlib-storage/"
+Issues = "https://github.com/barseghyanartur/fake-py-cloudpathlib-storage/issues"
+Documentation = "https://fake-py-cloudpathlib-storage.readthedocs.io/"
+Repository = "https://github.com/barseghyanartur/fake-py-cloudpathlib-storage/"
+Changelog = "https://fake-py-cloudpathlib-storage.readthedocs.io/en/latest/changelog.html"
+
+[project.optional-dependencies]
+all = ["fake-py-cloudpathlib-storage[gcs,s3,azure]"]
+gcs = [
+    "cloudpathlib[gs]>=0.26.0,<0.27.0",
+]
+s3 = [
+    "cloudpathlib[s3]>=0.26.0,<0.27.0",
+]
+azure = [
+    "cloudpathlib[azure]>=0.26.0,<0.27.0",
+]
+
+[dependency-groups]
+dev = [
+    "detect-secrets",
+    "doc8",
+    "ipython",
+    "mypy",
+    "pre-commit",
+    "pydoclint",
+    "ruff",
+    "twine",
+]
+test = [
+    "parametrize",
+    "pytest",
+    "pytest-codeblock",
+    "pytest-cov",
+]
+docs = [
+    "sphinx>=8.0",
+    "sphinx-rtd-theme>=3.0",
+    "sphinx-no-pragma",
+    "sphinx-llms-txt-link",
+    "sphinx-source-tree",
+]
+
+[tool.uv]
+default-groups = ["dev", "test", "docs"]
+
+[build-system]
+requires = ["uv_build>=0.13.0,<0.14.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "fakepy.cloudpathlib_storage"
+module-root = ""
+source-include = [
+    "conftest.py",
+    "*.rst",
+    "docs/**",
+    "Makefile",
+]
+source-exclude = [
+    "docs/_build",
+]
+
+[tool.ruff]
+line-length = 80
+
+# Enable Pyflakes `E` and `F` codes by default.
+lint.select = [
+    "B",  # Bugbear
+    "C4",  # Complexity
+    "E",  # pycodestyle
+    "F",  # Pyflakes
+    "G",  # Logging format
+    "I",  # Isort
+    "ISC",  # Implicit string concatenation
+    "INP",  # Implicit namespace packages
+    "N",  # Naming
+    "PERF",  # Perflint
+    "Q",  # Quotes
+    "SIM",  # Simplify
+    "TD",  # TO DO
+]
+lint.ignore = [
+    "G004",  # Allow use of f-string in logging
+    "ISC003",  # Allow explicitly concatenated strings
+    "TD002",  # Allow to do without author
+    "TD003",  # Allow to do without URL
+]
+fix = true
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "docs",
+]
+lint.per-file-ignores = {}
+
+# Allow unused variables when underscore-prefixed.
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+target-version = "py310"
+
+[tool.ruff.lint.isort]
+known-first-party = []
+known-third-party = []
+
+[tool.doc8]
+ignore-path = [
+    "docs/requirements.txt",
+    "fake_py_cloudpathlib_storage.egg-info/SOURCES.txt",
+]
+
+[tool.pytest.ini_options]
+addopts = [
+    "-ra",
+    "-vvv",
+    "-q",
+    "--import-mode=importlib",
+    "--cov=fakepy.cloudpathlib_storage",
+    "--ignore=.tox",
+    "--ignore=.venv",
+    "--ignore=tmp",
+    "--cov-report=html",
+    "--cov-report=term",
+    "--cov-report=annotate",
+    "--cov-append",
+    "--capture=no",
+]
+testpaths = [
+    "fakepy/cloudpathlib_storage/",
+    "*.rst",
+    "docs/*.rst",
+]
+pythonpath = ["."]
+consider_namespace_packages = true
+
+[tool.coverage.run]
+relative_files = true
+omit = [
+    ".tox/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "@overload",
+]
+
+[tool.mypy]
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+
+[tool.pydoclint]
+style = 'sphinx'
+exclude = '\.git|\.tox|tests/data|__copy_fake\.py'
+require-return-section-when-returning-nothing = false
+allow-init-docstring = true
+arg-type-hints-in-docstring = false
+
+[tool.sphinx-source-tree]
+output = "docs/llms.rst"
+ignore = [
+    "__pycache__",
+    "*.pyc",
+    "*.pyo",
+    "*.py,cover",
+    ".git",
+    ".hg",
+    ".svn",
+    ".tox",
+    ".nox",
+    ".venv",
+    "venv",
+    "env",
+    "*.egg-info",
+    "dist",
+    "build",
+    "node_modules",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".coverage",
+    "htmlcov",
+    ".idea",
+    ".vscode",
+    ".DS_Store",
+    "Thumbs.db",
+    ".ruff_cache",
+    ".coverage.*",
+    ".secrets.baseline",
+    ".pre-commit-config.yaml",
+    ".pre-commit-hooks.yaml",
+    ".readthedocs.yaml",
+    "CHANGELOG.rst",
+    "CODE_OF_CONDUCT.rst",
+    "LICENSE",
+    "SECURITY.rst",
+    "docs/_static",
+    "docs/examples",
+    "docs/changelog.rst",
+    "docs/code_of_conduct.rst",
+    "docs/documentation.rst",
+    "docs/security.rst",
+    "docs/source_tree.rst",
+    "docs/make.bat",
+    "docs/Makefile",
+    "docs/readme.rst",
+    "docs/requirements.txt",
+    ".coveralls.yml",
+    ".readthedocs.yaml",
+]
+order = [
+    "README.rst",
+    "CONTRIBUTING.rst",
+]
