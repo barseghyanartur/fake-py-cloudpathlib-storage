@@ -1,5 +1,5 @@
 # Update version ONLY here
-VERSION := 0.1.0
+VERSION := 0.1.1
 SHELL := /bin/bash
 UNAME_S := $(shell uname -s)
 # Makefile for project

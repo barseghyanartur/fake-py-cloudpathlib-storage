@@ -2,7 +2,7 @@
 name = "fake-py-cloudpathlib-storage"
 description = "cloudpathlib storage for fake.py"
 readme = "README.rst"
-version = "0.1.0"
+version = "0.1.1"
 requires-python = ">=3.10"
 dependencies = [
     "fake.py>=0.13.2",
@@ -121,6 +121,10 @@ lint.ignore = [
     "TD002",  # Allow to do without author
     "TD003",  # Allow to do without URL
 ]
+lint.per-file-ignores = {}
+
+# Allow unused variables when underscore-prefixed.
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 fix = true
 
 # Exclude a variety of commonly ignored directories.
@@ -146,10 +150,6 @@ exclude = [
     "venv",
     "docs",
 ]
-lint.per-file-ignores = {}
-
-# Allow unused variables when underscore-prefixed.
-lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 target-version = "py310"
 
