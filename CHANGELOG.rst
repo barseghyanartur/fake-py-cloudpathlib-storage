@@ -24,7 +24,7 @@ are used for versioning (schema follows below):
 
 0.1.1
 -----
-unreleased
+2026-10-16
 
 - ``relpath()`` now returns POSIX-style paths on every OS. Previously,
   ``LocalFileSystemStorage`` returned backslash-separated paths on Windows.
